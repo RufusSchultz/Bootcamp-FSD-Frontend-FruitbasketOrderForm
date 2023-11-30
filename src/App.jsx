@@ -73,6 +73,7 @@ Voorwaarden geaccepteerd: ${agreedWithTerms}
                     <input
                         type="text"
                         name="name"
+                        id="name"
                         onChange={(e) => setName(e.target.value)}
                     />
                 </div>
@@ -82,6 +83,7 @@ Voorwaarden geaccepteerd: ${agreedWithTerms}
                     <input
                         type="text"
                         name="surname"
+                        id="surname"
                         onChange={(e) => setSurname(e.target.value)}
                     />
                 </div>
@@ -91,6 +93,7 @@ Voorwaarden geaccepteerd: ${agreedWithTerms}
                     <input
                         type="number"
                         name="age"
+                        id="age"
                         placeholder="0"
                         onChange={(e) => setAge(parseInt(e.target.value))}
                     />
@@ -101,6 +104,7 @@ Voorwaarden geaccepteerd: ${agreedWithTerms}
                     <input
                         type="text"
                         name="zipcode"
+                        id="zipcode"
                         placeholder="1234AB"
                         onChange={(e) => setZipcode(e.target.value)}
                     />
@@ -126,6 +130,7 @@ Voorwaarden geaccepteerd: ${agreedWithTerms}
                         type="radio"
                         value="daytime"
                         name="delivery_time_of_day"
+                        id="delivery_time_of_day"
                         checked
                         onChange={(e) => setDeliveryTimeOfDay(e.target.value)}
                     />
@@ -134,6 +139,7 @@ Voorwaarden geaccepteerd: ${agreedWithTerms}
                         type="radio"
                         value="evening"
                         name="delivery_time_of_day"
+                        id="delivery_time_of_day"
                         onChange={(e) => setDeliveryTimeOfDay(e.target.value)}
                     />
                     <label htmlFor="delivery_time_of_day">'s Avonds</label>
@@ -145,6 +151,7 @@ Voorwaarden geaccepteerd: ${agreedWithTerms}
                 <div>
                     <textarea
                         name="comments"
+                        id="comments"
                         cols="30"
                         rows="10"
                         onChange={(e) => setComments(e.target.value)}
@@ -155,6 +162,7 @@ Voorwaarden geaccepteerd: ${agreedWithTerms}
                         <input
                             type="checkbox"
                             name="agrees_to_terms"
+                            id="agrees_to_terms"
                             onChange={(e) => setAgreedWithTerms(!agreedWithTerms)}
                         />
                         <label htmlFor="agrees_to_terms">Ik ga akkoord met de voorwaarden</label>
