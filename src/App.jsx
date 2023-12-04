@@ -1,5 +1,10 @@
 import './App.css'
 import {useState} from "react";
+import Button from "./components/Button.jsx";
+import FruitFieldset from "./components/FruitFieldset.jsx";
+import PersonalDetailField from "./components/PersonalDetailField.jsx";
+
+
 
 function App() {
     const [bananaValue, setBananaValue] = useState(0);
@@ -30,93 +35,82 @@ Voorwaarden geaccepteerd: ${agreedWithTerms}
         )
     }
 
+    function handleFruitReset() {
+        setBananaValue(0);
+        setStrawberryValue(0);
+        setAppleValue(0);
+        setKiwiValue(0);
+    }
+
     return (
         <>
             <h1>Fruitmand bezorgservice</h1>
-            <fieldset>
-                🍌 Bananen
-                <button
-                    onClick={() => setBananaValue(bananaValue - 1 >= 0 ? bananaValue - 1 : bananaValue)}> - </button>
-                {bananaValue}
-                <button onClick={() => setBananaValue(bananaValue + 1)}> +</button>
-            </fieldset>
-            <fieldset>
-                🍓 Aardbeien
-                <button
-                    onClick={() => setStrawberryValue(strawberryValue - 1 >= 0 ? strawberryValue - 1 : strawberryValue)}> - </button>
-                {strawberryValue}
-                <button onClick={() => setStrawberryValue(strawberryValue + 1)}> +</button>
-            </fieldset>
-            <fieldset>
-                🍏 Appels
-                <button onClick={() => setAppleValue(appleValue - 1 >= 0 ? appleValue - 1 : appleValue)}> - </button>
-                {appleValue}
-                <button onClick={() => setAppleValue(appleValue + 1)}> +</button>
-            </fieldset>
-            <fieldset>
-                🥝 Kiwi's
-                <button onClick={() => setKiwiValue(kiwiValue - 1 >= 0 ? kiwiValue - 1 : kiwiValue)}> - </button>
-                {kiwiValue}
-                <button onClick={() => setKiwiValue(kiwiValue + 1)}> +</button>
-            </fieldset>
-            <button onClick={() => {
-                setBananaValue(0);
-                setStrawberryValue(0);
-                setAppleValue(0);
-                setKiwiValue(0);
-            }}>Reset
-            </button>
+            <FruitFieldset
+                fruitName="🍌 Bananen"
+                fruitValue={bananaValue}
+                handleFruitChange={setBananaValue}
+            />
+            <FruitFieldset
+                fruitName="🍓 Aardbeien"
+                fruitValue={strawberryValue}
+                handleFruitChange={setStrawberryValue}
+            />
+            <FruitFieldset
+                fruitName="🍏 Appels"
+                fruitValue={appleValue}
+                handleFruitChange={setAppleValue}
+            />
+            <FruitFieldset
+                fruitName="🥝 Kiwi's"
+                fruitValue={kiwiValue}
+                handleFruitChange={setKiwiValue}
+            />
+            <Button
+                buttonText="Reset"
+                onClick={handleFruitReset}
+            />
 
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="name">Voornaam</label>
-                    <input
-                        type="text"
-                        name="name"
-                        id="name"
-                        onChange={(e) => setName(e.target.value)}
+                    <PersonalDetailField
+                        title="Voornaam"
+                        inputType="text"
+                        inputName="name"
+                        handleChange={setName}
                     />
                 </div>
-
                 <div>
-                    <label htmlFor="surname">Achternaam</label>
-                    <input
-                        type="text"
-                        name="surname"
-                        id="surname"
-                        onChange={(e) => setSurname(e.target.value)}
+                    <PersonalDetailField
+                        title="Achternaam"
+                        inputType="text"
+                        inputName="surname"
+                        handleChange={setSurname}
                     />
                 </div>
-
                 <div>
-                    <label htmlFor="age">Leeftijd</label>
-                    <input
-                        type="number"
-                        name="age"
-                        id="age"
+                    <PersonalDetailField
+                        title="Leeftijd"
+                        inputType="text"
+                        inputName="age"
+                        handleChange={setAge}
                         placeholder="0"
-                        onChange={(e) => setAge(parseInt(e.target.value))}
                     />
                 </div>
-
                 <div>
-                    <label htmlFor="zipcode">Postcode</label>
-                    <input
-                        type="text"
-                        name="zipcode"
-                        id="zipcode"
+                    <PersonalDetailField
+                        title="Postcode"
+                        inputType="text"
+                        inputName="zipcode"
+                        handleChange={setZipcode}
                         placeholder="1234AB"
-                        onChange={(e) => setZipcode(e.target.value)}
                     />
                 </div>
-
                 <div>
                     <p>
                         <label htmlFor="delivery_frequency">Bezorgfrequentie</label>
                     </p>
                     <select
                         name="delivery_frequency"
-                        id="delivery_frequency"
                         onChange={(e) => setDeliveryFrequency(e.target.value)}
                     >
                         <option value="weekly">Iedere week</option>
@@ -125,12 +119,10 @@ Voorwaarden geaccepteerd: ${agreedWithTerms}
                     </select>
                 </div>
                 <p>
-
                     <input
                         type="radio"
                         value="daytime"
                         name="delivery_time_of_day"
-                        id="delivery_time_of_day"
                         checked
                         onChange={(e) => setDeliveryTimeOfDay(e.target.value)}
                     />
@@ -139,7 +131,6 @@ Voorwaarden geaccepteerd: ${agreedWithTerms}
                         type="radio"
                         value="evening"
                         name="delivery_time_of_day"
-                        id="delivery_time_of_day"
                         onChange={(e) => setDeliveryTimeOfDay(e.target.value)}
                     />
                     <label htmlFor="delivery_time_of_day">'s Avonds</label>
@@ -151,7 +142,6 @@ Voorwaarden geaccepteerd: ${agreedWithTerms}
                 <div>
                     <textarea
                         name="comments"
-                        id="comments"
                         cols="30"
                         rows="10"
                         onChange={(e) => setComments(e.target.value)}
@@ -159,16 +149,18 @@ Voorwaarden geaccepteerd: ${agreedWithTerms}
                 </div>
 
                 <div>
-                        <input
-                            type="checkbox"
-                            name="agrees_to_terms"
-                            id="agrees_to_terms"
-                            onChange={(e) => setAgreedWithTerms(!agreedWithTerms)}
-                        />
-                        <label htmlFor="agrees_to_terms">Ik ga akkoord met de voorwaarden</label>
+                    <input
+                        type="checkbox"
+                        name="agrees_to_terms"
+                        onChange={(e) => setAgreedWithTerms(!agreedWithTerms)}
+                    />
+                    <label htmlFor="agrees_to_terms">Ik ga akkoord met de voorwaarden</label>
                 </div>
 
-                <button type="submit">Verzend</button>
+                <Button
+                    buttonText="Verzend"
+                    buttonType="submit"
+                />
 
 
             </form>
