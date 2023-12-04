@@ -1,0 +1,6 @@
+.personal_detail_field {
+    display: flex;
+    width: 200px;
+    gap: 1rem;
+    justify-content: right;
+}
