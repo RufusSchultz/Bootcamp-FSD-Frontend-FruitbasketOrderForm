@@ -1,0 +1,13 @@
+button {
+    font-size: 2rem;
+    font-family: Arial, sans-serif;
+    color: var(--green-color);
+    border-color: var(--green-color);
+    border-radius: 10px;
+    padding: 0.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    color: var(--yellow-color);
+}
