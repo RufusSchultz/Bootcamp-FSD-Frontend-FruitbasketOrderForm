@@ -1,13 +1,15 @@
 
-function PersonalDetailField({ title, inputType, inputName, inputId, handleChange, placeholder }) {
+function PersonalDetailField({ title, inputType, inputName, inputId, inputValue, handleChange, placeholder }) {
 
     return(
         <>
-            <label htmlFor={inputName}>{title}</label>
+            <label htmlFor={inputId}>{title}</label>
             <input
                 type={inputType}
                 name={inputName}
-                onChange={(e) => handleChange(e.target.value)}
+                id={inputId}
+                value={inputValue}
+                onChange={handleChange}
                 placeholder={placeholder}
             />
         </>

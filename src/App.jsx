@@ -5,34 +5,36 @@ import FruitFieldset from "./components/FruitFieldset.jsx";
 import PersonalDetailField from "./components/PersonalDetailField.jsx";
 
 
-
 function App() {
     const [bananaValue, setBananaValue] = useState(0);
     const [strawberryValue, setStrawberryValue] = useState(0);
     const [appleValue, setAppleValue] = useState(0);
     const [kiwiValue, setKiwiValue] = useState(0);
 
-    const [name, setName] = useState("");
-    const [surname, setSurname] = useState("");
-    const [age, setAge] = useState(0);
-    const [zipcode, setZipcode] = useState("");
-    const [deliveryFrequency, setDeliveryFrequency] = useState("Iedere week");
-    const [deliveryTimeOfDay, setDeliveryTimeOfDay] = useState("");
-    const [comments, setComments] = useState("");
-    const [agreedWithTerms, setAgreedWithTerms] = useState(false);
+    const [formState, setFormState] = useState({
+        name: "",
+        surname: "",
+        age: 0,
+        zipcode: "",
+        delivery_frequency: "weekly",
+        delivery_time_of_day: "",
+        comments: "",
+        agrees_to_terms: false,
+    });
+
+    function handleFormChange(e) {
+        const newValue = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+
+        setFormState({
+            ...formState,
+            [e.target.name]: newValue,
+        });
+    }
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log(`Je fruitmand met ${bananaValue} bananen, ${strawberryValue} aardbeien, ${appleValue} appels en ${kiwiValue} kiwi's is onderweg, ${name}!
-Naam: ${name} ${surname}
-Leeftijd: ${age}
-Postcode: ${zipcode}
-Bezorgfrequentie: ${deliveryFrequency}
-Bezorgmoment van de dag: ${deliveryTimeOfDay}
-Opmerkingen: ${comments}
-Voorwaarden geaccepteerd: ${agreedWithTerms} 
-`
-        )
+        console.log(`Je fruitmand met ${bananaValue} bananen, ${strawberryValue} aardbeien, ${appleValue} appels en ${kiwiValue} kiwi's is onderweg, ${formState.name}!`)
+        console.log(formState);
     }
 
     function handleFruitReset() {
@@ -76,7 +78,9 @@ Voorwaarden geaccepteerd: ${agreedWithTerms}
                         title="Voornaam"
                         inputType="text"
                         inputName="name"
-                        handleChange={setName}
+                        inputId="name"
+                        inputValue={formState.name}
+                        handleChange={handleFormChange}
                     />
                 </div>
                 <div>
@@ -84,7 +88,9 @@ Voorwaarden geaccepteerd: ${agreedWithTerms}
                         title="Achternaam"
                         inputType="text"
                         inputName="surname"
-                        handleChange={setSurname}
+                        inputId="surname"
+                        inputValue={formState.surname}
+                        handleChange={handleFormChange}
                     />
                 </div>
                 <div>
@@ -92,7 +98,9 @@ Voorwaarden geaccepteerd: ${agreedWithTerms}
                         title="Leeftijd"
                         inputType="text"
                         inputName="age"
-                        handleChange={setAge}
+                        inputId="age"
+                        inputValue={formState.age}
+                        handleChange={handleFormChange}
                         placeholder="0"
                     />
                 </div>
@@ -101,7 +109,9 @@ Voorwaarden geaccepteerd: ${agreedWithTerms}
                         title="Postcode"
                         inputType="text"
                         inputName="zipcode"
-                        handleChange={setZipcode}
+                        inputId="zipcode"
+                        inputValue={formState.zipcode}
+                        handleChange={handleFormChange}
                         placeholder="1234AB"
                     />
                 </div>
@@ -111,7 +121,9 @@ Voorwaarden geaccepteerd: ${agreedWithTerms}
                     </p>
                     <select
                         name="delivery_frequency"
-                        onChange={(e) => setDeliveryFrequency(e.target.value)}
+                        id="delivery_frequency"
+                        value={formState.delivery_frequency}
+                        onChange={handleFormChange}
                     >
                         <option value="weekly">Iedere week</option>
                         <option value="other_weekly">Om de week</option>
@@ -123,17 +135,20 @@ Voorwaarden geaccepteerd: ${agreedWithTerms}
                         type="radio"
                         value="daytime"
                         name="delivery_time_of_day"
-                        checked
-                        onChange={(e) => setDeliveryTimeOfDay(e.target.value)}
+                        id="daytime_delivery"
+                        checked={formState.delivery_time_of_day === "daytime"}
+                        onChange={handleFormChange}
                     />
-                    <label htmlFor="delivery_time_of_day">Overdag</label>
+                    <label htmlFor="daytime_delivery">Overdag</label>
                     <input
                         type="radio"
                         value="evening"
                         name="delivery_time_of_day"
-                        onChange={(e) => setDeliveryTimeOfDay(e.target.value)}
+                        id="evening_delivery"
+                        checked={formState.delivery_time_of_day === "evening"}
+                        onChange={handleFormChange}
                     />
-                    <label htmlFor="delivery_time_of_day">'s Avonds</label>
+                    <label htmlFor="evening_delivery">'s Avonds</label>
                 </p>
 
                 <div>
@@ -142,9 +157,11 @@ Voorwaarden geaccepteerd: ${agreedWithTerms}
                 <div>
                     <textarea
                         name="comments"
+                        id="comments"
                         cols="30"
                         rows="10"
-                        onChange={(e) => setComments(e.target.value)}
+                        value={formState.comments}
+                        onChange={handleFormChange}
                     />
                 </div>
 
@@ -152,7 +169,9 @@ Voorwaarden geaccepteerd: ${agreedWithTerms}
                     <input
                         type="checkbox"
                         name="agrees_to_terms"
-                        onChange={(e) => setAgreedWithTerms(!agreedWithTerms)}
+                        id="agrees_to_terms"
+                        checked={formState.agrees_to_terms}
+                        onChange={handleFormChange}
                     />
                     <label htmlFor="agrees_to_terms">Ik ga akkoord met de voorwaarden</label>
                 </div>

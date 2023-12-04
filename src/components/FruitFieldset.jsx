@@ -9,7 +9,7 @@ function FruitFieldset({ fruitName, fruitValue, handleFruitChange }) {
             {fruitName}
             <button onClick={() => handleFruitChange(fruitValue - 1 >= 0 ? fruitValue - 1 : fruitValue)}> - </button>
             {fruitValue}
-            <button onClick={() => handleFruitChange(fruitValue + 1)}> +</button>
+            <button onClick={() => handleFruitChange(fruitValue + 1)}> + </button>
         </fieldset>
     )
 }
